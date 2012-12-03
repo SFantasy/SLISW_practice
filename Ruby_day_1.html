@@ -1,3 +1,9 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title>Ruby day 1</title>
+</head>
+<body>
 <h3>第一天</h3>
 <p>
     <strong>找</strong>
@@ -20,13 +26,13 @@
         <p>
             替换一次:
         </p>
-        <pre class="brush:bash;">
-            "Hello World".sub('World','Ruby')
+        <pre>
+"Hello World".sub('World','Ruby')
 =&gt; Hello Ruby
         </pre>
         <p>替换所有: </p>
-        <pre class="brush:bash;">
-            "This is not right".gsub('i',' ')
+        <pre>
+"This is not right".gsub('i',' ')
 =&gt; Th s  s not r ght
         </pre>
     </li>
@@ -49,7 +55,7 @@
         <p>
             打印字符串&quot;Hello World.&quot;:
         </p>
-<pre class="brush:bash">
+<pre>
             irb&gt;puts "Hello World."
 Hello World.
 =&gt; nil
@@ -59,8 +65,8 @@ Hello World.
         <p>
             在字符串&quot;Hello Ruby.&quot;中，找出&quot;Ruby.&quot;所在下标。
         </p>
-        <pre class="brush:bash">
-            irb&gt;"Hello Ruby.".scan(/[Ruby\.]/) { |x| puts "Hello Ruby.".index(x)}
+        <pre>
+irb&gt;"Hello Ruby.".scan(/[Ruby\.]/) { |x| puts "Hello Ruby.".index(x)}
 6
 7
 8
@@ -76,8 +82,8 @@ Hello World.
         <p>
             打印你的名字十遍
         </p>
-<pre class="brush:bash">
-            irb&gt;10.times do puts "fanTasy" end
+<pre>
+irb&gt;10.times do puts "fanTasy" end
 fanTasy
 fanTasy
 fanTasy
@@ -95,8 +101,8 @@ fanTasy
         <p>
             从打印字符串&quot;This is sentence number 1.&quot;，其中的数字1会一直变化到10。
         </p>
-        <pre class="brush:bash">
-            irb&gt;n = 0
+        <pre>
+irb&gt;n = 0
     while (n&lt;10)
     puts "This is sentence number"+(n+1).to_s+"."
     end
@@ -120,7 +126,7 @@ This is sentence number 10
             用自己喜爱的文本编辑器写好一个Ruby程序，保存之后在终端输入:
         </p>
         <pre>
-            ruby fileName.rb
+ruby fileName.rb
         </pre>
     </li>
     <li>
@@ -128,8 +134,8 @@ This is sentence number 10
             猜数字程序：
         </p>
     </li>
-    <pre class="brush:ruby">
-        puts "Guess a number:"
+    <pre>
+puts "Guess a number:"
 a = gets()
 b = rand(10)
 while true
@@ -146,3 +152,6 @@ while true
 end
     </pre>
 </ul>
+<a href="Ruby_day_2.html">Ruby Day 2</a>
+</body>
+</html>
