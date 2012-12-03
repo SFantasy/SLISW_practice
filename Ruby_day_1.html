@@ -1,0 +1,148 @@
+<h3>第一天</h3>
+<p>
+    <strong>找</strong>
+</p>
+<ul>
+    <li>
+        <p>
+            Ruby API 文档：<a href="http://ruby-doc.org/core-1.9.3/">http://ruby-doc.org/core-1.9.3/</a>
+        </p>
+    </li>
+    <li>
+        <p>
+            Programming Ruby: The Pragmatic Programmer&#39;s Guide [TFH08]的免费在线版本：<a href="http://www.ruby-doc.org/docs/ProgrammingRuby/">http://www.ruby-doc.org/docs/ProgrammingRuby/</a>
+	</p>
+    </li>
+    <li>
+        <p>
+            替换字符串某一部分的方法：
+        </p>
+        <p>
+            替换一次:
+        </p>
+        <pre class="brush:bash;">
+            "Hello World".sub('World','Ruby')
+=&gt; Hello Ruby
+        </pre>
+        <p>替换所有: </p>
+        <pre class="brush:bash;">
+            "This is not right".gsub('i',' ')
+=&gt; Th s  s not r ght
+        </pre>
+    </li>
+    <li>
+        <p>
+            有关Ruby正则表达式的资料：<a href="http://ruby-doc.org/core-1.9.3/Regexp.html">http://ruby-doc.org/core-1.9.3/Regexp.html</a> 
+        </p>
+    </li>
+    <li>
+        <p>
+            有关Ruby区间(range)的资料：<a href="http://ruby-doc.org/core-1.9.3/Range.html">http://ruby-doc.org/core-1.9.3/Range.html</a>
+        </p>
+    </li>
+</ul>
+<p>
+    <strong>做</strong>
+</p>
+<ul>
+    <li>
+        <p>
+            打印字符串&quot;Hello World.&quot;:
+        </p>
+<pre class="brush:bash">
+            irb&gt;puts "Hello World."
+Hello World.
+=&gt; nil
+        </pre>
+    </li>
+    <li>
+        <p>
+            在字符串&quot;Hello Ruby.&quot;中，找出&quot;Ruby.&quot;所在下标。
+        </p>
+        <pre class="brush:bash">
+            irb&gt;"Hello Ruby.".scan(/[Ruby\.]/) { |x| puts "Hello Ruby.".index(x)}
+6
+7
+8
+9
+10
+=&gt; "Hello Ruby."
+        </pre>
+        <p>
+            其中，scan为Ruby在字符串中扫描的函数，寻找到匹配&quot;Ruby.&quot;中任意字符的字符，然后再用index方法求下标。
+        </p>
+    </li>
+    <li>
+        <p>
+            打印你的名字十遍
+        </p>
+<pre class="brush:bash">
+            irb&gt;10.times do puts "fanTasy" end
+fanTasy
+fanTasy
+fanTasy
+fanTasy
+fanTasy
+fanTasy
+fanTasy
+fanTasy
+fanTasy
+fanTasy
+=&gt; 10
+        </pre>
+    </li>
+<li>
+        <p>
+            从打印字符串&quot;This is sentence number 1.&quot;，其中的数字1会一直变化到10。
+        </p>
+        <pre class="brush:bash">
+            irb&gt;n = 0
+    while (n&lt;10)
+    puts "This is sentence number"+(n+1).to_s+"."
+    end
+This is sentence number 1.
+This is sentence number 2.
+This is sentence number 3.
+This is sentence number 4.
+This is sentence number 5.
+This is sentence number 6.
+This is sentence number 7.
+This is sentence number 8.
+This is sentence number 9.
+This is sentence number 10
+        </pre>
+    </li>
+    <li>
+        <p>
+            从文件运行Ruby程序
+        </p>
+        <p>
+            用自己喜爱的文本编辑器写好一个Ruby程序，保存之后在终端输入:
+        </p>
+        <pre>
+            ruby fileName.rb
+        </pre>
+    </li>
+    <li>
+        <p>
+            猜数字程序：
+        </p>
+    </li>
+    <pre class="brush:ruby">
+        puts "Guess a number:"
+a = gets()
+b = rand(10)
+while true
+   if a.to_i &gt; b
+      puts "Too large\n"
+   elsif a.to_i &lt; b
+      puts "Too small\n"
+   else
+      puts "all right\n"
+      exit
+   end
+   puts "Guess again:\n"
+   a = gets()
+end
+    </pre>
+</ul>
