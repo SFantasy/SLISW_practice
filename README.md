@@ -7,5 +7,6 @@ I create this repository to record my journey of this book.
 And if you are also reading this book, we can have a discuss about it.
 
 #### NOTE
+* Download the files and browser them in your browsers such as Chrome and Fire Fox.
 * Some parts of the practice may be not perfectly correct, I am also a beginner and need your help.  
 * I've post these practice both in my Diandian blog and CSDN blog.
