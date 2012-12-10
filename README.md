@@ -15,5 +15,5 @@ And if you are also reading this book, we can have a discuss about it.
 * 练习的内容做成了html文件，可以在任意浏览器中浏览之。
 * Some parts of the practice may be not perfectly correct, I am also a beginner and need your help.  
 * 有些练习的内容不能保证完全正确，我也初学者也需要帮助。
-* I also using Google to find some tips to do the practices.
+* I also use Google to find some tips to do the practices.
 * I've post these practice both in my Diandian blog and CSDN blog.
