@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Io Day 1</title>
+  <meta charset="utf-8"/>
+</head>
+<body style="width:70%; margin-left:15%;">
+  <h3>第一天</h3>
+  <hr />
+  <p><strong>答</strong></p>
+  <ul>
+	<li><p>对1+1求值，然后对1＋"one"求值。Io是强类型还是弱类型？用代码验证。<p>
+		<pre>Io> 1+"one"
+Exception: argument 0 to method '+' must be a Number, not a 'Seuqentce'
+---------
+message '+' in 'Command Line' on line 1
+		</pre>
+		<p>显然，Io是强类型语言。</p>
+	</li>
+	<li><p>0是true还是false? 空字符串是true还是false? nil是true还是false? 用代码证实。</p>
+	  <pre>Io> 0 isTrue
+==> true
+Io> "" isTrue
+==> true
+Io> nil isTrue
+==> false
+       </pre>
+	</li>
+	<li>
+	  <p>如何知道某个原型都支持哪些槽？</p>
+	  <pre>Object slotNames
+......</pre>
+	  </li>
+<li>
+<p>= 、:=、 ::= 之间有什么区别？你会在什么情况下使用它们？</p>
+<p>
+在<a href="http://iolanguage.org/scm/io/docs/IoGuide.html#Syntax-Operators">Io Programming Guide</a>上找到了关于运算符的一些内容，其中关于这三个运算符是这样的：</p>
+<pre>
+operator action
+    ::=  Creates slot, creates setter, assigns value 
+     :=  Creates slot, assigns value 
+      =  Assigns value to slot if it exists, otherwise raises exception 
+</pre>
+</li>
+  </ul>
+<hr />
+<p><strong>做</strong></p>
+<ul>
+  <li>
+	<p>
+	  从文件中运行Io程序。
+	</p>
+	<p>
+	  和Ruby一样，创建一个.io的文件，写一点代码进去，比如保存为test.io
+	</p>
+	<pre>
+	  echo '"hello io" println' > test.io
+	  io test.io
+	  hello io
+	</pre>
+  </li>
+  <li>
+	<p>
+	  给定槽的名称，执行该槽中的代码。
+	</p>
+	<pre>
+   //test.io
+   Vehicle := Object clone
+   Car := Vehicle clone
+   ferrari := Car clone
+   
+   Car selfDescription := method("I am a car." println)
+   
+   ferrari selfDescription
+   //bash output
+   I am a car.
+	</pre>
+  </li>
+</ul>
+<hr />
+<a href="Io_day_2.html">  Io day 2</a>
+</body>
+</html>
