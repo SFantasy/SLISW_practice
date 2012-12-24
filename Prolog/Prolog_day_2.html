@@ -100,10 +100,13 @@ listMerge( ListOne, ListTwo, MergedList ) :-
     listMerge( ListOne, TailTwo, MergedTail ).		  
 
 %-- 快排 import from wikipedia.org
-q:- L=[33,18,2,77,66,18,9,25], last(P,_), (quicksort(L,P,_), write(P), nl).    /* 加入last/2會在印P時沒複合項 */
+q:- L=[33,18,2,77,66,18,9,25], last(P,_), (quicksort(L,P,_), write(P), nl).    
+/* 加入last/2會在印P時沒複合項 */
  
-partition([], _, [], []).                       /* 此行表空集亦視為分割（分割成空集與空集）*/
-partition([X|Xs], Pivot, Smalls, Bigs) :-       /* 原list分成Smalls與Bigs; 此rule保證Smalls集<Pivot且Bigs集>=Pivot */
+partition([], _, [], []).                       
+/* 此行表空集亦視為分割（分割成空集與空集）*/
+partition([X|Xs], Pivot, Smalls, Bigs) :-       
+/* 原list分成Smalls與Bigs; 此rule保證Smalls集<Pivot且Bigs集>=Pivot */
     (   X @< Pivot ->
         Smalls = [X|Rest],
         partition(Xs, Pivot, Rest, Bigs)
@@ -111,23 +114,31 @@ partition([X|Xs], Pivot, Smalls, Bigs) :-       /* 原list分成Smalls與Bigs; �
         partition(Xs, Pivot, Smalls, Rest)
     ).
  
-quicksort([])     --> [].                       /* 表empty list視為排序好的list */
-quicksort([X|Xs]) -->                   /* 此行相當於quicksort([X|Xs],Start,End) :-  此rule讓Start為sorted list */
-    { partition(Xs, X, Smaller, Bigger) },      /* 由上行最左端元素為 Pivot */
-    quicksort(Smaller), [X], quicksort(Bigger). /* 此行相當於      quicksort(Smaller,Start,A),
-                                                                A=[X|B],  注意首字母大寫者皆視為變數(list)
-                                                                quicksort(Bigger,B,End).  */
+quicksort([])     --> [].                       
+/* 表empty list視為排序好的list */
+quicksort([X|Xs]) -->                   
+/* 此行相當於quicksort([X|Xs],Start,End) :-  此rule讓Start為sorted list */
+    { partition(Xs, X, Smaller, Bigger) },      
+    /* 由上行最左端元素為 Pivot */
+    quicksort(Smaller), [X], quicksort(Bigger). 
+    /* 此行相當於      quicksort(Smaller,Start,A),
+                       A=[X|B],  注意首字母大寫者皆視為變數(list)
+                       quicksort(Bigger,B,End).  */
 :- initialization(q).           /* 啟動q處goals */
 
 %-- Wikipedia上还有一种排序的方法，相当简洁
  
 q:- L=[33,18,2,77,18,66,9,25], (sortcsj(L,P), write(P), nl). 
  
-sortcsj(L,S) :-  permutation(L,S), ordered(S).  /* L為原list, S為排序好的list, 此為permutation關係(built-in) */
+sortcsj(L,S) :-  permutation(L,S), ordered(S).  
+/* L為原list, S為排序好的list, 此為permutation關係(built-in) */
  
-ordered([]).                    /* 表empty list視為排序好的list */
-ordered([_|[]]).                        /* 只有一元素之list視為排序好的list */
-ordered([A|[B|T]]) :- A =< B, ordered([B|T]).   /* 此rule約束所謂的排序好是指前項元素小於或等於後一項元素 */
+ordered([]).                    
+/* 表empty list視為排序好的list */
+ordered([_|[]]).                        
+/* 只有一元素之list視為排序好的list */
+ordered([A|[B|T]]) :- A =< B, ordered([B|T]).   
+/* 此rule約束所謂的排序好是指前項元素小於或等於後一項元素 */
  
 :- initialization(q).           /* 啟動q處goals */
 		</pre>
