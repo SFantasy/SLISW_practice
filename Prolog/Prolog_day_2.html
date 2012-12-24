@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<meta charset="utf-8" />
+	<title>Prolog Day 2</title>
+  </head>
+  <body style="width:70%; margin-left:15%;">
+	<h3>第二天</h3>
+	<hr />
+	<p>发现了一个有趣的事，在用我的vim编辑Prolog程序的时候, 是默认将其用Perl的高亮进行处理的。</p>
+	<p><strong>做</strong></p>
+	<ul>
+	  <li>
+		<p>翻转一个列表中的元素次序</p>
+		<p>由于Head表示的就是列表中的第一个元素，而Tail表示的列表中剩余的几个元素，那么要翻转列表中的元素次序，就先将Head取出并将其放入翻转的列表之中，并对此进行递归操作。</p>
+		<pre>
+%-- 给定几个翻转列表的事实
+reserve([], []).
+reserve([a],[a]).
+reserve([a,b,c], [c,b,a]).
+
+reserve(List, ReserveList) :- 
+   (List = [Head|Tail]), 
+   reserve(Tail, ReserveTail), 
+   append(ReserveTail, [Head], ReserveList).
+%-- Output
+| ?- reserve([1,2,3,4], List).
+
+List = [4,3,2,1] ? ;
+
+no
+		</pre>
+	  </li>
+	  <li>
+		<p>找出列表中最小的元素</p>
+		<p>要找出列表中的最小元素，先将Head作为最小的元素，然后不断从剩下的列表中取出其Head，并将之与当前的最小元素相比较，这样就可以找出最小的元素了。</p>
+		<pre>
+min([A], A).
+min(List, MinNum) :-
+   (List = [Head|Tail]),
+   min(Tail, MinTailNum),
+   MinNum is min(Head, MinTailNum).
+%-- Output
+| ?- min([1,2,3,4], Min).
+
+Min = 1 ? ;
+
+no
+| ?- min([1,2,3,4,5,6], Min).
+
+Min = 1 ? ;
+
+no
+		</pre>
+	  </li>
+	  <li>
+		<p>对一个列表中的元素进行排序。</p>
+		<p>既然在上一道题目中已经可以找出一个列表中的最小元素，那么可以用选择排序来对列表进行排序，即每一次找出列表中的最小元素，然后放入一个List中，随着该List的扩大，至原列表中无元素的时候排序也就完成了。不过遗憾的是自己还是没有实现出来－－</p>
+		<p>以下贴出几种排序的方法（归并、快排等）</p>
+		<pre>
+%-- 归并 import from en.literateprograms.org
+mergeSort( [], [] ).
+mergeSort( [A], [A] ).
+mergeSort( List, SortedList ) :-
+    (List = [FirstItem, SecondItem | Tail]),
+    listDivide( List, ListOne, ListTwo ),
+
+    mergeSort( ListOne, SortedListOne ),
+    mergeSort( ListTwo, SortedListTwo ),
+
+    listMerge( SortedListOne, SortedListTwo, SortedList ).
+
+listDivide( [], [], [] ).
+listDivide( [A], [A], [] ).
+ 
+
+listDivide( List, FirstHalf, LastHalf ) :-
+    (List = [FirstItem, SecondItem | Rest]),
+    (FirstHalf = [FirstItem | FirstRest]),
+    (LastHalf = [SecondItem | SecondRest]),
+    listDivide( Rest, FirstRest, SecondRest ).
+
+listMerge( A, [], A ).
+listMerge( [], A, A ).
+
+listMerge( ListOne, ListTwo, MergedList ) :-
+    (ListOne = [HeadOne | TailOne]),
+    (ListTwo = [HeadTwo | TailTwo]),
+    (HeadOne =< HeadTwo),
+
+    (MergedList = [HeadOne | MergedTail]),
+ 
+    listMerge( TailOne, ListTwo, MergedTail ).
+
+listMerge( ListOne, ListTwo, MergedList ) :-
+    (ListOne = [HeadOne | TailOne]),
+    (ListTwo = [HeadTwo | TailTwo]),
+    (HeadOne > HeadTwo),
+    (MergedList = [HeadTwo | MergedTail]),
+    listMerge( ListOne, TailTwo, MergedTail ).		  
+
+%-- 快排 import from wikipedia.org
+q:- L=[33,18,2,77,66,18,9,25], last(P,_), (quicksort(L,P,_), write(P), nl).    /* 加入last/2會在印P時沒複合項 */
+ 
+partition([], _, [], []).                       /* 此行表空集亦視為分割（分割成空集與空集）*/
+partition([X|Xs], Pivot, Smalls, Bigs) :-       /* 原list分成Smalls與Bigs; 此rule保證Smalls集<Pivot且Bigs集>=Pivot */
+    (   X @< Pivot ->
+        Smalls = [X|Rest],
+        partition(Xs, Pivot, Rest, Bigs)
+    ;   Bigs = [X|Rest],
+        partition(Xs, Pivot, Smalls, Rest)
+    ).
+ 
+quicksort([])     --> [].                       /* 表empty list視為排序好的list */
+quicksort([X|Xs]) -->                   /* 此行相當於quicksort([X|Xs],Start,End) :-  此rule讓Start為sorted list */
+    { partition(Xs, X, Smaller, Bigger) },      /* 由上行最左端元素為 Pivot */
+    quicksort(Smaller), [X], quicksort(Bigger). /* 此行相當於      quicksort(Smaller,Start,A),
+                                                                A=[X|B],  注意首字母大寫者皆視為變數(list)
+                                                                quicksort(Bigger,B,End).  */
+:- initialization(q).           /* 啟動q處goals */
+
+%-- Wikipedia上还有一种排序的方法，相当简洁
+ 
+q:- L=[33,18,2,77,18,66,9,25], (sortcsj(L,P), write(P), nl). 
+ 
+sortcsj(L,S) :-  permutation(L,S), ordered(S).  /* L為原list, S為排序好的list, 此為permutation關係(built-in) */
+ 
+ordered([]).                    /* 表empty list視為排序好的list */
+ordered([_|[]]).                        /* 只有一元素之list視為排序好的list */
+ordered([A|[B|T]]) :- A =< B, ordered([B|T]).   /* 此rule約束所謂的排序好是指前項元素小於或等於後一項元素 */
+ 
+:- initialization(q).           /* 啟動q處goals */
+		</pre>
+	  </li>
+	</ul>
+<a href="Prolog_day_1.html"> Prolog Day 1 </a> | <a href="Prolog_day_3.html">  Prolog Day 3 </a>
+  </body>
+</html>
