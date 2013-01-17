@@ -14,6 +14,6 @@ And if you are also reading this book, we can have a discuss about it.
 * Download the files and browser them in your browsers such as Chrome and Fire Fox.  
 * 练习的内容做成了html文件，可以在任意浏览器中浏览之。
 * Some parts of the practice may be not perfectly correct, I am also a beginner and need your help.  
-* 有些练习的内容不能保证完全正确，我也初学者也需要帮助。
+* 有些练习的内容不能保证完全正确，希望与诸位共同进步。
 * I also use Google to find some tips to do the practices.
-* I've post these practice both in my Diandian blog and CSDN blog.
+* I've post these practice both in my Diandian blog and cnBlog.(I stopped update my CSDN blog and mv them to cnBlog)
