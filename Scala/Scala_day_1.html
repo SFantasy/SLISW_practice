@@ -28,10 +28,123 @@
 	  </li>
 	  <li>
 		<p>Scala Tic-Tac-Toe</p>
+		<p>看完一天的内容，在做这个小游戏的时候还是感觉对这门语言很生疏。比如经常遇到一些之前没有预料到的问题，比如List和Array的问题，包含没有实现的函数需要抽象化类的问题，函数定义时的“＝”问题等等ORZ。</p>
 		<pre>
-		  
+	  class Game {
+	  //initialize the Game Table
+	  var table = Array(
+	  	  "_", "_", "_",
+	  	  "_", "_", "_",
+	  	  "_", "_", "_"
+	  )
+	  //0 for going and 1 for winning
+	  var gameState = 0
+	  //define two kinds of pieces in the game
+	  val piece = List("X", "O")
+	  //0 for "X" to play and 1 for "O" to play
+	  var player = 0
+	  var currentPiece = -1
+	  
+	  //print information for users and read the choose
+	  def choose() {
+	  	  if ( this.player == 0) {
+		  	 println("X's move(0~8):")
+		  } else {
+		   	 println("O's move(0~8):")
+		  }
+		  currentPiece = Console.readInt();
+	  }
+	  
+	  def validMove ():Boolean = {
+	  	  if(this.table(currentPiece) == "_") {
+	          return true
+		  } else {
+		      return false
+		  }
+	  }
+	  
+	  def setPiece() {
+	  	  if ( this.player == 0) {
+		  	  this.table(currentPiece) = "X"
+		  } else {
+		      this.table(currentPiece) = "O"
+		  }
+	  }
+
+	  //judge the game
+	  def judger() {
+	  	  if( (table(0) != "_" &&
+		  	  table(0) == table(1) &&
+		  	  table(0) == table(2)) ||
+			  (table(3) != "_" &&
+			  table(3) == table(4) &&
+			  table(3) == table(5)) ||
+			  (table(6) != "_" &&
+			  table(6) == table(7) &&
+			  table(6) == table(8)) ||
+			  (table(0) != "_" &&
+			  table(0) == table(3) &&
+			  table(0) == table(6)) ||
+			  (table(1) != "_" &&
+			  table(1) == table(4) &&
+			  table(1) == table(7)) ||
+			  (table(2) != "_" &&
+			  table(2) == table(5) &&
+			  table(2) == table(8)) ||
+			  (table(0) != "_" &&
+			  table(0) == table(4) &&
+			  table(0) == table(8)) ||
+			  (table(2) != "_" &&
+			  table(2) == table(4) &&
+			  table(2) == table(6))) {
+			      gameState = 1
+			  }			  
+	  }
+	  def hasFinished():Boolean = {
+	  	  this.judger()
+	      if ( this.gameState == 1 ) {
+		  	 if (this.player == 1) {
+			 	 println("O win!")
+			 } else {
+			     println("X win!")
+			 }
+		     return true
+		  } else {
+		     return false
+		  }
+	  }
+	  //print game table
+	  def printTable() {
+	  	  println(table(0) + "|" + table(1) + "|" + table(2))
+		  println(table(3) + "|" + table(4) + "|" + table(5))
+		  println(table(6) + "|" + table(7) + "|" + table(8))
+	  }
+	  //main function for play
+	  def play() {
+	  	  this.printTable()
+	  	  while(!this.hasFinished) {
+		      this.choose()
+			  while( !this.validMove()){
+			      println("INVALID MOVE!")
+			      this.choose()
+			  }
+			  this.setPiece()
+			  this.printTable()
+			  if( player == 0) {
+			      player = 1
+			  } else {
+				  player = 0
+			  }
+		  }
+	  }
+}
+
+var game = new Game()
+game.play()
 		</pre>
 	  </li>
 	</ul>
+	<hr />
+	<a href="Scala_day_2.html"> Scala day 2</a>
   </body>
 </html>
