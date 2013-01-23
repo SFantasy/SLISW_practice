@@ -30,19 +30,19 @@ object PageLoader {
         reg.findAllIn(getPageContent(url)).size
     }
 }
-
+// the List of urls
 val urls = List("http://www.baidu.com/",
                 "http://www.seu.edu.cn/",
                 "http://www.fantasyshao.tk/"
                )
-
+// Cauculate the time of running
 def timeMethod(method: ()=> Unit) = {
     val start = System.nanoTime
     method()
     val end = System.nanoTime
     println("Method took " + (end - start)/1000000000.0 + " seconds.")
 }
-
+// not using actors
 def getPageSizeSequentially() = {
     for(url <- urls) {
         println("Size for " + url + ": " + PageLoader.getPageSize(url))
@@ -51,7 +51,7 @@ def getPageSizeSequentially() = {
         println("Links in " + url + ": " + PageLoader.getUrlNumber(url))
     }
 }
-
+// concurrency method
 def getPageSizeConcurrently() = {
     val caller = self
     
@@ -59,7 +59,7 @@ def getPageSizeConcurrently() = {
         actor { caller ! ("Size", url, PageLoader.getPageSize(url))}
         actor { caller ! ("Number", url, PageLoader.getUrlNumber(url))}
     }
-    
+    // two actor for each url, so the size became lager
     for(i <- 1 to (urls.size * 2)) {
         receive {
             case ("Size", url, size) =>
@@ -77,9 +77,6 @@ println("Concurrent run:")
 timeMethod { getPageSizeConcurrently }
 
 		</pre>
-	  </li>
-	  <li>
-		<p>让sizer跟踪给定页面上的所有链接并加载它们。例如，对给定页面“google.com”，sizer会计算出Google主页及主页所链接的页面的数量的总和。</p>
 	  </li>
 	</ul>
 	<hr />
