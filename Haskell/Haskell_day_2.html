@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<meta charset="utf-8" />
+    <title>Haskell Day 2</title>
+  </head>
+  <body style="width: 70%; margin-left: 15%;">
+	<h3>第二天</h3>
+    <hr />
+	<ul>
+	  <li>
+		编写函数sort，接受一个列表作为参数并且返回一个有序的列表 <br />
+这里我选择的是选择排序，即选择列表中最小的元素然后放在第一位.
+		<pre>
+module MySort where
+  
+  import Data.List
+
+  mySort list
+    | null list = list
+    | otherwise = [x] ++ mySort (delete x list) 
+        where x = minimum list 
+		</pre>
+	  </li>
+	  <li>
+		编写函数sort，接受一个列表和一个比较两个参数大小的函数作为参数，然后返回一个有序列表 <br />
+        这个函数可以参阅一下[<a href="#ref">参考</a>]中的博客。
+		<pre>
+module Main where
+  
+  import Data.Ord
+
+  mySortBy f (x:xs) = myInsertBy f x $ mySortBy f xs
+    where myInsertBy _ x [] = []
+          myInsertBy f x (y:ys) | f x y == GT = y:myInsertBy f x ys
+                                | otherwise   = x:y:ys
+
+		</pre>
+	  </li>
+	  <li>
+		编写一个Haskell函数，将字符串转换为数字。字符串应该以$2, 245, 678, .99形式提供，并且可以包含前导零
+		<pre>
+
+		</pre>
+	  </li>
+	  <li>
+		编写一个函数，该函数接受一个参数x,并返回从x起始，每两个元素间相隔差值为2的惰性序列。然后，编写另外一个函数，返回从y开始，每两个元素间相隔差值为4的惰性序列。通过组合将两个函数合并在一起返回一个从x+y开始，每两个元素间隔差值为7的惰性序列
+	  </li>
+	  <li>
+		使用偏应用函数定义两个函数，其中一个将返回一个数值的一半.另外一个函数将会将\n附加到任意字符串的末尾.
+	  </li>
+	</ul>
+	<ol>
+	  <h4>参考</h4>
+	  <li>
+		<a name="ref" href="http://blog.wakatta.jp/blog/2011/11/18/seven-languages-in-seven-weeks-haskell-day-2/">wakatta's blog</a>
+	  </li>
+	  <li>
+		<a href="http://www.haskell.org/ghc/docs/7.4-latest/html/libraries/base-4.5.1.0/Data-List.html">Data.List</a>
+	  </li>
+	</ol>
+    <hr />
+    <a href="Haksell_day_1.html"> Haskell day 1</a>| <a href="Haskell_day_3.html">Haskell day 3</a>
+  </body>
+</html>
