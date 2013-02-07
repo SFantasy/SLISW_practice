@@ -40,14 +40,84 @@ module Main where
 	  <li>
 		编写一个Haskell函数，将字符串转换为数字。字符串应该以$2, 245, 678, .99形式提供，并且可以包含前导零
 		<pre>
+module Main where
 
+  import Data.Char
+
+  parser :: String -> Float
+
+  parser value = read strippedValue :: Float
+    where 
+      strippedValue = 
+        foldl 
+          (\ newString c ->
+            if (isDigit c || c == '.' ) then
+              newString ++ [c]
+            else
+              newString
+          )
+          " "
+          value
 		</pre>
+这样解决的问题是，还没有解决.99这样的字符串转换问题（由于本身不提供将.99 -> 0.99的parse）
+<br />这里有一个更健全的版本:
+<pre>
+module Parse where
+
+import Data.Char
+import Data.List
+
+parse str =
+    let (dig, frac) = break (== '.') str
+    in foldl' pDig 0 (clean dig) + foldr pFrac 0 (clean frac) / 10
+
+clean s   = filter isDigit s
+pDig  a b = 10*a + toNum b
+pFrac a b = toNum a + b/10
+toNum c   = fromIntegral $ ord c - ord '0'  
+</pre>
 	  </li>
 	  <li>
 		编写一个函数，该函数接受一个参数x,并返回从x起始，每两个元素间相隔差值为2的惰性序列。然后，编写另外一个函数，返回从y开始，每两个元素间相隔差值为4的惰性序列。通过组合将两个函数合并在一起返回一个从x+y开始，每两个元素间隔差值为7的惰性序列
+<br />
+要做到这个非常简单，在ghci中我们可以测试发现:
+<pre>
+Prelude> [1..5]
+[1,2,3,4,5]
+Prelude> [1,2..5]
+[1,2,3,4,5]
+-- 这两者的效果是等价的
+Prelude> [1,2..]
+-- 这个输出的就是一个无穷序列
+Prelude> take 5 [1,2..]
+[1,2,3,4,5]
+</pre>
+所以要做到间隔相差n, 只需要在序列的前两个数字上下功夫即可
+<pre>
+module Main where
+  two x = [x, x+2..]
+  three y = [y, y+3..]
+  seven x y = zipWith (+) (two x) (three y)
+-- Output
+Prelude> :load "lazy.hs"
+[1 of 1] Compiling Main             ( lazy.hs, interpreted )
+Ok, modules loaded: Main.
+*Main> take 5 (two 3)
+[3,5,7,9,11]
+*Main> take 5 (three 4)
+[4,7,10,13,16]
+*Main> take 5 (seven 2)
+*Main> take 5 (seven 2 3)
+[5,10,15,20,25]
+</pre>
 	  </li>
 	  <li>
 		使用偏应用函数定义两个函数，其中一个将返回一个数值的一半.另外一个函数将会将\n附加到任意字符串的末尾.
+<pre>
+module Main where
+  half = (/ 2)
+  newLine = (++ "/n")  
+</pre>
 	  </li>
 	</ul>
 	<ol>
@@ -57,6 +127,9 @@ module Main where
 	  </li>
 	  <li>
 		<a href="http://www.haskell.org/ghc/docs/7.4-latest/html/libraries/base-4.5.1.0/Data-List.html">Data.List</a>
+	  </li>
+	  <li>
+		<a href="http://www.haskell.org/ghc/docs/7.4-latest/html/libraries/base-4.5.1.0/Data-Char.html">Data.Char</a>
 	  </li>
 	</ol>
     <hr />
