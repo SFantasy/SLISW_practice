@@ -8,9 +8,7 @@
 	<h3>第三天</h3>
     <hr />
 	<p>最后一天所谓的［特殊能力］即Haskell的类型系统--支持类型推断.</p>
-	<ul>
-	  <li>
-		一些有关monad的教程
+		<p>一些有关monad的教程</p>
 		<ol>
 		  <li>
 			Haskell Wiki: <a href="http://www.haskell.org/haskellwiki/Monad">monad</a>
@@ -21,12 +19,30 @@
 		  <li>
 			Wiki 教科书: <a href="http://zh.wikibooks.org/zh-cn/Haskell/%E7%90%86%E8%A7%A3monads">理解monad</a>
 		  </li>
-		</ol>
-	  </li>
+		</ol>  
+	  突然出现的Monad概念有点手足无措啊……虽然monad的设计原由、使用也不是很难，但是回过头来一时之间还真理解不了. 做了蛮久只完成了一个题目，还是有参考的情况下.
+      <ul>
 	  <li>
 		编写一个函数，该函数使用Maybe monad查找一个散列值表。编写一个散列表，该散列表可以多级存储其他的散列表。使用Maybe monad检索一个散列key对应的多级散列表中的元素.
 		<pre>
-		  
+module Main where
+  
+my_lookup key [] = Nothing
+my_lookup key ((k, value):rest)
+  | key == k = Just value
+  | otherwise = lookup key rest
+
+testData = [(1, []), 
+            (2, [("a", [("i", "tada!")]), ("b", [("j", "nope")])]), 
+            (3, [("c", [("k", "tada!")])])]
+
+
+*Main> my_lookup 2 testData >>= my_lookup "a" >>= my_lookup "i"
+Just "tada!"
+*Main> my_lookup 2 testData >>= my_lookup "b" >>= my_lookup "j"
+Just "nope"
+*Main> my_lookup 2 testData >>= my_lookup "b" >>= my_lookup "t"
+Nothing
 		</pre>
 	  </li>
 	  <li>
@@ -39,7 +55,16 @@
 		在非函数式语言中实现一个monad
 		<br />在Haskell Wiki上就有一个monad in other languages的部分：<a href="http://www.haskell.org/haskellwiki/Monad#Monads_in_other_languages">here</a>
 	  </li>
+	  <li>
+		<h4>参考</h4>
+		<ol>
+		  <li>
+			<a href="http://blog.wakatta.jp/blog/2011/11/19/seven-languages-in-seven-weeks-haskell-day-3/">Wakatta</a>
+		  </li>
+		</ol>
+	  </li>
 	</ul>
+	  
     <hr />
     <a href="Haksell_day_2.html"> Haskell day 2</a>
   </body>
