@@ -1,17 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-	<meta charset="utf-8"/>
-	<title>Io Day 2</title>
-  </head>
-  <body style="width:70%; margin-left:15%;">
-	<h3>第二天</h3>
-	<hr />
-	<p><strong>做</strong></p>
-	<ul>
-	  <li>
-		<p>计算fibonacci数列</p>
-		<pre>#循环的方法
+# Io Day 2
+
+##做
+
+* 计算fibonacci数列
+
+```
+#循环的方法
 array := List clone
 array := list(1, 1)
 #change the value of a to cal fib(a)
@@ -46,31 +40,30 @@ fib(10) println
 1
 1
 55
-		</pre>
-	  </li>
-	  <li>
-		<p>在分母为0的情况下，如何让运算符返回0？</p>
-		<pre>
-  Number setSlot("division", Number getSlot("/"))
-  
-  Number setSlot("/",
-     method( denominator,
-           if((denominator == 0),return (0))
-           return(self division( denominator))
-        )
-  )
-  
-  (1 / 0) println
-  (2 / 1) println
-  #Output
-  0
-  2
-		</pre>
-	  </li>
-	  <li>
-		<p>对二维数组进行求和
-		</p>
-		<pre>
+```    		
+
+* 在分母为0的情况下，如何让运算符返回0？
+
+```  
+Number setSlot("division", Number getSlot("/"))
+
+Number setSlot("/",
+ method( denominator,
+       if((denominator == 0),return (0))
+       return(self division( denominator))
+    )
+)
+
+(1 / 0) println
+(2 / 1) println
+#Output
+0
+2
+```    		
+
+* 对二维数组进行求和 
+
+``` 
 #Define a 2D array
 2d_array := list(
 		 list(1, 2, 3),
@@ -84,38 +77,36 @@ sum := 0
 sum println
 #Output
 The sum of this 2D array is: 45
-		</pre>
-	  </li>
-	  <li>
-		<p>对列表增加一个名为myAverage的槽，以计算列表中所有数字的平均值。如果列表没有数字会发生什么？</p>
-		<pre>
+```    		
 
+* 对列表增加一个名为myAverage的槽，以计算列表中所有数字的平均值。如果列表没有数字会发生什么？
+    
+```       
 List myAverage := method(
-	 sum := 0 
-	 self foreach(k, 
-	 	  if((k type != "Number"),
-		  		Exception raise("There is a NaN-value in the list, please check your list." ),
-		  sum =( sum + k))
-	)
-	return (sum/(self size))
+    sum := 0 
+    self foreach(k, 
+        if((k type != "Number"),
+            Exception raise("There is a NaN-value in the list, please check your list." ),
+        sum =( sum + k))
+    )
+    return (sum/(self size))
 )
 
 list(1, 2, 3) myAverage println
 list(1, "a", 3) myAverage println
 #Output
 2
-  Exception: There is a NaN-value in the list, please check your list.
-  ---------
-  Exception raise                      myAverage.io 5
-  List myAverage                       myAverage.io 13
-  CLI doFile                           Z_CLI.io 140
-  CLI run                              IoState_runCLI() 1
-	  
-		</pre>
-	  </li>
-	  <li>
-		<p>对二维列表写一个原型。该原型的dim(x, y)方法可为一个包含y个列表的列表分配内存，其中每个列表都有x个元素，set(x, y)方法可以设置列表中的值，get(x, y)方法可返回列表中的值。</p>
-		<pre>
+Exception: There is a NaN-value in the list, please check your list.
+---------
+Exception raise                      myAverage.io 5
+List myAverage                       myAverage.io 13
+CLI doFile                           Z_CLI.io 140
+CLI run                              IoState_runCLI() 1  		
+```
+
+* 对二维列表写一个原型。该原型的dim(x, y)方法可为一个包含y个列表的列表分配内存，其中每个列表都有x个元素，set(x, y)方法可以设置列表中的值，get(x, y)方法可返回列表中的值。
+
+``` 
 2DList := List clone
 #This method should be considered later
 2DList dim := method(x, y,
@@ -144,19 +135,12 @@ matrix get(1, 1) println
 #Output
 list(list(0, 1, 2), list(1, 2, 3), list(2, 3, 4))
 2 
-		</pre>
-	  </li>
-	  <!--
-	  <li>
-		<p>写一个矩阵转置方法。</p>
-		<pre>
+```    		
 
-		</pre>
-	  </li>
-	  -->
-	  <li>
-		<p>把矩阵写入文件，并从文件中读取矩阵。</p>
-		<pre>#Define a matrix
+* 把矩阵写入文件，并从文件中读取矩阵。
+
+```  
+#Define a matrix
 matrix := list(
 	   list(1, 2, 3),
 	   list(4, 5, 6),
@@ -178,11 +162,12 @@ readData2 close
 #Output
 list(list(1, 2, 3);, list(4, 5, 6);, list(7, 8, 9););
 list(list(1, 2, 3), list(4, 5, 6), list(7, 8, 9))
-		</pre>
-	  </li>
-	  <li>
-		<p>写一个猜数字程序。</p>
-		<pre>#Guess number
+```    		
+
+* 写一个猜数字程序。
+
+``` 
+#Guess number
 standardIO := File standardInput
 guess := nil
 counter := 0
@@ -219,10 +204,7 @@ Too big
 Guess a number(1..100):
 92
 You are right!
-		</pre>
-	  </li>
-	</ul>
-<hr />
-<a href="Io_day_1.html">  Io day 1</a> | <a href="Io_day_3.html">  Io day 3</a>
-  </body>
-</html>
+```
+
+<- [ Io day 1](Io_day_1.md) | [ Io day 3](Io_day_3.md) ->
+

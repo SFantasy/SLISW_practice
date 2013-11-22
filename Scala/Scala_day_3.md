@@ -1,20 +1,13 @@
-<!DOCTYPE html>
-<html>
-  <head>
-	<meta charset="utf-8" />
-	<title>Scala Day 3</title>
-  </head>
-  <body style="width: 70%; margin-left: 15%;">
-	<h3>第三天</h3>
-	<hr />
-	<ul>
-	  <li>
-		<p>对于sizer程序，如果你没有为每一个要跟踪的链接创建一个新的actor，这段程序的性能会发生怎样的变化？</p>
-		<p>感觉会很慢，因为每个actor都包含了react和receive方法，如果没有对于每个链接都创建actor的话，那和sequentially的方法就没有什么区别了。</p>
-	  </li>
-	  <li>
-		<p>修改sizer程序，增加一个计算页面上链接总和的消息。</p>
-		<pre>
+# Scala Day 3
+
+* 对于sizer程序，如果你没有为每一个要跟踪的链接创建一个新的actor，这段程序的性能会发生怎样的变化？
+
+感觉会很慢，因为每个actor都包含了react和receive方法，如果没有对于每个链接都创建actor的话，那和sequentially的方法就没有什么
+区别了。
+
+* 修改sizer程序，增加一个计算页面上链接总和的消息。
+
+```  
 import scala.io._
 import scala.actors._
 import Actor._
@@ -75,11 +68,7 @@ timeMethod { getPageSizeSequentially }
 
 println("Concurrent run:")
 timeMethod { getPageSizeConcurrently }
+```
 
-		</pre>
-	  </li>
-	</ul>
-	<hr />
-	<a href="Scala_day_2.html"> Scala day 2</a>
-  </body>
-</html>
+<- [ Scala day 2](Scala_day_2.md)
+
