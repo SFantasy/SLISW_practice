@@ -87,12 +87,12 @@ tree.each do |key, value|
 end
 end
 
-def visit_all(&block;)
-visit &block;
-children.each {|c| c.visit_all &block;}
+def visit_all(&block)
+visit &block
+children.each {|c| c.visit_all &block}
 end
 
-def visit(&block;)
+def visit(&block)
 block.call self
 end
 end
