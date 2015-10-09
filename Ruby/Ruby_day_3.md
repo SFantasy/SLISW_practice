@@ -12,9 +12,7 @@ CSV: Comma Separated Values, 一种用来存储数据的纯文本格式，数据
 
 这个练习在一个博客上看到了比较详细的解释：
 
-[http://www.bennadel.com/blog/2063-Seven-Languages-In-Seven-Weeks-Ruby-
-Day-3.htm](http://www.bennadel.com/blog/2063-Seven-Languages-In-Seven-Weeks-Ruby-
-Day-3.htm)
+[http://www.bennadel.com/blog/2063-Seven-Languages-In-Seven-Weeks-Ruby-Day-3.htm](http://www.bennadel.com/blog/2063-Seven-Languages-In-Seven-Weeks-Ruby-Day-3.htm)
 
 而在Seven Language In Seven Weeks的论坛上有一些关于作者在第三天所举的最后一个例子的讨论。
 
